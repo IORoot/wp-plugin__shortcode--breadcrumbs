@@ -1,0 +1,20 @@
+
+.accordion_checkbox:checked ~ .accordion_content {
+    display: block;
+}
+
+    
+/* 
+* ----------- HOME <--> CPT ------------------------------------------------------------------------------------------------
+*/
+/* .breadcrumbs > .breadcrumb_cpt:before, */
+.breadcrumbs > .breadcrumb_top:before,
+.breadcrumbs > .breadcrumb_post:before,
+.breadcrumbs > .breadcrumb_sub:before {
+    content: "";
+    width: 2.5rem;
+    position: absolute;
+    border-top: dashed #22C55E 1px;
+    left: -2.5rem;
+    top: 1.1rem;
+}	
