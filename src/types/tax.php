@@ -129,7 +129,7 @@ class tax
 
     private function generate_accordion($label, $list, $level, $highlight)
     {
-        $this->html[] .= '<div class="breadcrumb_'.$level.' cpt_tab relative w-40 mr-10 ">';
+        $this->html[] .= '<div class="breadcrumb_'.$level.' cpt_tab relative w-40 mr-10 z-50">';
 
         $accordion = new accordion;
         $accordion->set_label($label);

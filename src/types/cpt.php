@@ -43,7 +43,7 @@ class cpt
 
     private function generate_html()
     {
-        $this->html[] .= '<div class="breadcrumb_cpt cpt_tab relative w-40 mr-10">';
+        $this->html[] .= '<div class="breadcrumb_cpt cpt_tab relative w-40 mr-10 z-50">';
 
         foreach ($this->CPT as $loop_cpt)
         {

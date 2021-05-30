@@ -22,7 +22,7 @@ class single
     {
         global $wp_query;
         
-        $html = '<a href="/" class="w-80 bg-green-400 px-4 py-2 rounded-2xl">';
+        $html = '<a href="/" class="w-80 bg-green-400 px-4 py-2 rounded-2xl z-50">';
         $html .= 'Single';
         $html .= '</a>';
 
