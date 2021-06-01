@@ -68,8 +68,8 @@ class accordion
     private function html_label()
     {
         $this->html[] .= '<input class="accordion_checkbox absolute opacity-0 z-0" type="checkbox" id="'.$this->label.'"></input>';
-        $this->html[] .= '<label class="accordion_label flex '.$this->hightlight.' px-4 py-2 cursor-pointer rounded-2xl text-center z-10 absolute w-40 text-sm truncate" for="'.$this->label.'">';
-            $this->html[] .= '<div class="font-light flex-1 overflow-hidden">' . ucfirst($this->label) . '</div>';
+        $this->html[] .= '<label class="accordion_label flex '.$this->hightlight.' px-4 py-2 cursor-pointer rounded-2xl text-center z-10 absolute w-40 text-sm" for="'.$this->label.'">';
+            $this->html[] .= '<div class="font-light flex-1 overflow-hidden truncate">' . ucfirst($this->label) . '</div>';
             $this->html[] .= '<svg class="w-4 h-4 m-auto transform rotate-90"><use xlink:href="#chevron-right"></use></svg>';
             if (!$this->noarrow) {
                 $this->html[] .= '<div class="absolute top-1 -left-2 text-'.$this->colour.' text-lg">&#9656;</div>';
