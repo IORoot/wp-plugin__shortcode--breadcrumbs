@@ -8,7 +8,8 @@ class accordion
 
     private $label;
     private $list;
-    private $hightlight = 'bg-gray-200 fill-gray-300 hover:bg-green-500 hover:text-white hover:fill-white';
+    private $colour;
+    private $hightlight;
     private $noarrow = false;
 
     private $html;
@@ -34,10 +35,16 @@ class accordion
         $this->list = $list;
     }
 
-    public function set_highlight($truefalse)
+    public function set_colour($colour)
     {
+        $this->colour = $colour;
+    }
+
+    public function set_highlight($truefalse = false)
+    {
+        $this->hightlight = 'bg-gray-200 fill-gray-300 hover:bg-'.$this->colour.' hover:text-white hover:fill-white';
         if (!$truefalse) { return; }
-        $this->hightlight = 'bg-green-500 text-white fill-white hover:underline ';
+        $this->hightlight = 'bg-'.$this->colour.' text-white fill-white hover:underline ';
     }
 
     public function no_arrow($noarrow)
@@ -65,7 +72,7 @@ class accordion
             $this->html[] .= '<div class="font-light flex-1">' . ucfirst($this->label) . '</div>';
             $this->html[] .= '<svg class="w-4 h-4 m-auto transform rotate-90"><use xlink:href="#chevron-right"></use></svg>';
             if (!$this->noarrow) {
-                $this->html[] .= '<div class="absolute top-1 -left-2 text-green-500 text-lg">&#9656;</div>';
+                $this->html[] .= '<div class="absolute top-1 -left-2 text-'.$this->colour.' text-lg">&#9656;</div>';
             }
         $this->html[] .= '</label>';
     }
@@ -86,7 +93,7 @@ class accordion
 
     private function html_accordion_list_item()
     {
-        $this->html[] .= '<a href="'.strtolower($this->item_url).'" class="flex px-4 py-2 capitalize fill-gray-300 hover:bg-green-500 hover:text-white hover:fill-white hover:underline">';
+        $this->html[] .= '<a href="'.strtolower($this->item_url).'" class="flex px-4 py-2 capitalize fill-gray-300 hover:bg-'.$this->colour.' hover:text-white hover:fill-white hover:underline">';
             $this->html[] .= '<div class="flex-1 font-light text-sm">' . $this->item_name . '</div>';
             $this->html[] .= '<svg class=" w-4 h-4 m-auto"><use xlink:href="#chevron-right"></use></svg>';
         $this->html[] .= '</a>';

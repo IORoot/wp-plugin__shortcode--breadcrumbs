@@ -8,9 +8,16 @@ class single
 
     private $results = 'post';
 
-    public function __construct()
+    private $colour;
+
+    public function run()
     {
         $this->generate_html();
+    }
+
+    public function set_colour($colour)
+    {
+        $this->colour = $colour;
     }
 
     public function get_results()

@@ -8,6 +8,7 @@ class initialise
 
     use render;
 
+    private $colour;
     private $result_array;
     private $results;
 
@@ -19,6 +20,8 @@ class initialise
 
     public function run($atts = array())
     {
+        $this->colour = $atts['colour'];
+
         global $wp_query;
 
         $this->enqueue_assets();
@@ -75,6 +78,8 @@ class initialise
     {
         $ns = 'andyp\\breadcrumb\\types\\'.$type;
         $page_type = new $ns;
+        $page_type->set_colour($this->colour);
+        $page_type->run();
         $this->result_array[] = $page_type->get_results();
     }
 

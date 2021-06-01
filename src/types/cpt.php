@@ -10,12 +10,14 @@ class cpt
     private $wp;
     private $CPT;
 
+    private $colour;
+
     private $current_CPT;
 
     private $html = [];
     private $results = 'cpt';
 
-    public function __construct()
+    public function run()
     {
         $this->variables();
         $this->current_cpt();
@@ -26,6 +28,11 @@ class cpt
     public function get_results()
     {
         return $this->results;
+    }
+
+    public function set_colour($colour)
+    {
+        $this->colour = $colour;
     }
 
 
@@ -54,6 +61,8 @@ class cpt
         $accordion = new accordion;
         $accordion->set_label($this->current_CPT);
         $accordion->set_list($list);
+        $accordion->set_colour($this->colour);
+        $accordion->set_highlight();
         $accordion->no_arrow(true);
         $accordion->build();
 

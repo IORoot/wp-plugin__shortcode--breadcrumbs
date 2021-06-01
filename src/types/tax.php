@@ -9,6 +9,8 @@ class tax
 
     private $wp;
 
+    private $colour;
+
     private $current_taxonomy;
     private $top_category;
     private $top_category_list;
@@ -22,7 +24,7 @@ class tax
     private $html;
     private $results = 'tax';
 
-    public function __construct()
+    public function run()
     {
         $this->set_variables();
         $this->generate_top_category();
@@ -33,6 +35,11 @@ class tax
         $this->generate_post_list();
         $this->generate();
         $this->implode_html();
+    }
+
+    public function set_colour($colour)
+    {
+        $this->colour = $colour;
     }
 
     public function get_results()
@@ -134,6 +141,7 @@ class tax
         $accordion = new accordion;
         $accordion->set_label($label);
         $accordion->set_list($list);
+        $accordion->set_colour($this->colour);
         $accordion->set_highlight($highlight);
         $accordion->build();
         $this->html[] .= $accordion->get_results();
