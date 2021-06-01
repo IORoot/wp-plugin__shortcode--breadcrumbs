@@ -8,6 +8,7 @@ class initialise
 
     use render;
 
+    private $wp;
     private $colour;
     private $result_array;
     private $results;
@@ -23,6 +24,7 @@ class initialise
         $this->colour = $atts['colour'];
 
         global $wp_query;
+        $this->wp = $wp_query;
 
         $this->enqueue_assets();
 
@@ -43,33 +45,17 @@ class initialise
     private function assertain_page_type()
     {
 
-        // [Homepage]
-        // $this->page_type('home');
-
+        $this->page_type('cpt'); 
 
         // [Homepage] --> [ CPT ] --> [Category] --> [Subcategory]
         if ( is_tax() ) {  
-            $this->page_type('cpt'); 
             $this->page_type('tax'); 
         }
 
-
         // [Homepage] --> [ CPT ] --> [Category] --> [Subcategory] --> [Single]
         if ( is_single() ) { 
-            $this->page_type('cpt'); 
-            $this->page_type('tax');
-            $this->page_type('single'); 
+            $this->page_type('post_tax');
         }
-
-
-        // tag
-        // if ( is_tag() )     { $type = 'tag'; }
-
-        // Search
-        // if ( is_search() )  { $type = 'search'; }
-
-        // 404
-        // if ( is_404() )     { $type = '404'; }
 
     }
 
@@ -102,7 +88,5 @@ class initialise
     {
         wp_register_style(  'andyp_breadcrumb_css', ANDYP_BREADCRUMB_URL . '/src/css/style.css' ); 
         wp_enqueue_style(   'andyp_breadcrumb_css');
-        // wp_register_script( 'andyp_breadcrumb_toggle_checkboxes', ANDYP_BREADCRUMB_URL . '/src/js/toggle_checkboxes.js' ); 
-        // wp_enqueue_script(  'andyp_breadcrumb_toggle_checkboxes');
     }
 }

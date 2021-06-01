@@ -51,7 +51,10 @@ class tax
     {
         global $wp_query;
         $this->wp = $wp_query;
-        $this->current_taxonomy = $this->wp->queried_object->taxonomy;
+
+        if (is_a($this->wp->queried_object, 'WP_Term')){
+            $this->current_taxonomy = $this->wp->queried_object->taxonomy;
+        }
 
     }
 
