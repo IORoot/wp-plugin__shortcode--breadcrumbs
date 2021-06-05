@@ -127,7 +127,7 @@ class tax
 
         $this->generate_accordion($this->top_category, $this->top_category_list, 'top', $this->top_category_highlight);
     
-        if(!$this->sub_category ){ return; }
+        if(!$this->sub_category || !$this->sub_category_list ){ return; }
         
         $this->generate_accordion($this->sub_category, $this->sub_category_list, 'sub', $this->sub_category_highlight);
 

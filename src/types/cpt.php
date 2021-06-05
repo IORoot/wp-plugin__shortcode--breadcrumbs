@@ -45,7 +45,15 @@ class cpt
 
     private function current_cpt()
     {
-        $this->current_CPT = $this->wp->post->post_type;
+        if (isset($this->wp->post->post_type)){
+            $this->current_CPT = $this->wp->post->post_type;
+        }
+
+        if (is_a($this->wp->queried_object, 'WP_Term'))
+        {
+            $this->current_CPT = str_replace('_category','', $this->wp->queried_object->taxonomy);
+        }
+        
     }
 
     private function generate_html()
