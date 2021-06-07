@@ -84,10 +84,19 @@ class accordion
 
         foreach ($this->list as $this->item_name => $this->item_url)
         {
+            $this->format_title();
             $this->html_accordion_list_item();
         }
 
         $this->html[] .= '</div>';
+    }
+
+    private function format_title()
+    {
+        if (strpos($this->item_name, ' - ') !== false) {
+            $new_title = explode(" - ", $this->item_name);
+            $this->item_name = $new_title[0] . " - " . $new_title[1];
+        }
     }
 
 

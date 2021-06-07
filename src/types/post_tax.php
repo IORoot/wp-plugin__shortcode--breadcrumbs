@@ -77,9 +77,16 @@ class post_tax
 
             foreach ( $sub_terms as $loop_sub_term ) {
 
-                $this->sub_category[$loop_sub_term->term_id] = $loop_sub_term->name;
-        
-                if ($loop_sub_term->parent == 0){ continue; }
+                // If there is a single category
+                if ($loop_sub_term->parent == 0){
+                    $this->top_category[$loop_sub_term->term_id] = $loop_sub_term->name;
+                    continue;
+                } else {
+                    $this->sub_category[$loop_sub_term->term_id] = $loop_sub_term->name;
+                }
+                
+                // If there is a parent category, go to next loop
+                // if ($loop_sub_term->parent == 0){ continue; }
 
                 $parent = get_term($loop_sub_term->parent);
                 $this->top_category[$parent->term_id] = $parent->name;
@@ -125,7 +132,9 @@ class post_tax
 
     private function generate_post_list()
     {
-        if (!$this->sub_category){ return; }
+
+        if ( $this->sub_category){ $key = $this->sub_category; }
+        if (!$this->sub_category){ $key = $this->top_category; }
 
         $posts = get_posts([
             'post_type'   => $this->wp->queried_object->post_type,
@@ -134,7 +143,7 @@ class post_tax
                 array(
                     'taxonomy' => $this->taxonomy_object->name,
                     'field' => 'term_id', 
-                    'terms' => array_key_first($this->sub_category),
+                    'terms' => array_key_first($key),
                     'include_children' => false
                 )
             ]
@@ -153,14 +162,18 @@ class post_tax
     private function generate()
     {
 
-        $this->generate_accordion(array_shift($this->top_category), $this->top_category_list, 'top', false);
-    
-        if(!$this->sub_category ){ return; }
+        if ($this->top_category_list) {
+            $this->generate_accordion(array_shift($this->top_category), $this->top_category_list, 'top', false);
+        }
         
-        $this->generate_accordion(array_shift($this->sub_category), $this->sub_category_list, 'sub', false);
+        if ($this->sub_category_list) {
+            $this->generate_accordion(array_shift($this->sub_category), $this->sub_category_list, 'sub', false);
+        }
 
-        $this->generate_accordion($this->post_title, $this->post_list, 'post', true);
-
+        if ($this->post_list) {
+            $label = explode(" - ", $this->post_title);
+            $this->generate_accordion($label[1], $this->post_list, 'post', true);
+        }
     }
 
 
