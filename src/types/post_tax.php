@@ -163,24 +163,30 @@ class post_tax
     {
 
         if ($this->top_category_list) {
-            $this->generate_accordion(array_shift($this->top_category), $this->top_category_list, 'top', false);
+            $this->generate_accordion(array_shift($this->top_category), $this->top_category_list, 'top', false, '40');
         }
         
         if ($this->sub_category_list) {
-            $this->generate_accordion(array_shift($this->sub_category), $this->sub_category_list, 'sub', false);
+            $this->generate_accordion(array_shift($this->sub_category), $this->sub_category_list, 'sub', false, '30');
         }
 
         if ($this->post_list) {
-            $label = explode(" - ", $this->post_title);
-            $this->generate_accordion($label[1], $this->post_list, 'post', true);
+
+            $label = $this->post_title;
+            if (strpos($label, ' - ') !== false) {
+                $label = explode(" - ", $label);
+                $label = $label[1];
+            }
+            
+            $this->generate_accordion($label, $this->post_list, 'post', true, '20');
         }
     }
 
 
 
-    private function generate_accordion($label, $list, $level, $highlight)
+    private function generate_accordion($label, $list, $level, $highlight, $zindex)
     {
-        $this->html[] .= '<div class="breadcrumb_'.$level.' cpt_tab relative w-40 mr-10 z-50">';
+        $this->html[] .= '<div class="breadcrumb_'.$level.' cpt_tab relative w-full md:w-40 mr-10 z-'.$zindex.' h-9 mb-1 md:mb-0">';
 
         $accordion = new accordion;
         $accordion->set_label($label);

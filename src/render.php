@@ -8,7 +8,7 @@ trait render
 
     public function open_flexbox()
     {
-        return '<div class="flex items-start breadcrumbs">';
+        return '<div class="flex flex-col md:flex-row items-start breadcrumbs">';
     }
 
     public function close_flexbox()

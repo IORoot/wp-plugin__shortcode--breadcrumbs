@@ -125,21 +125,21 @@ class tax
     private function generate()
     {
 
-        $this->generate_accordion($this->top_category, $this->top_category_list, 'top', $this->top_category_highlight);
+        $this->generate_accordion($this->top_category, $this->top_category_list, 'top', $this->top_category_highlight, '40');
     
         if(!$this->sub_category || !$this->sub_category_list ){ return; }
         
-        $this->generate_accordion($this->sub_category, $this->sub_category_list, 'sub', $this->sub_category_highlight);
+        $this->generate_accordion($this->sub_category, $this->sub_category_list, 'sub', $this->sub_category_highlight, '30');
 
-        $this->generate_accordion($this->post_title, $this->post_list, 'post', false);
+        $this->generate_accordion($this->post_title, $this->post_list, 'post', false, '20');
 
     }
 
 
 
-    private function generate_accordion($label, $list, $level, $highlight)
+    private function generate_accordion($label, $list, $level, $highlight, $zindex)
     {
-        $this->html[] .= '<div class="breadcrumb_'.$level.' cpt_tab relative w-40 mr-10 z-50">';
+        $this->html[] .= '<div class="breadcrumb_'.$level.' cpt_tab relative w-full md:w-40 mr-10 z-'.$zindex.' h-9 mb-1 md:mb-0">';
 
         $accordion = new accordion;
         $accordion->set_label($label);
